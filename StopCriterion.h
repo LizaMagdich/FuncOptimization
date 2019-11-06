@@ -6,10 +6,8 @@
 #include <vector>
 
 using namespace std;
+const double step_1 = 10e-3;
 
-const double eps = 10e-5;
-const double step = 10e-3;
-const int N = 1000;
 
 double Norm(vector<double> x);
 vector<double> Gradient(Function * func, vector<double> x);
@@ -27,6 +25,9 @@ vector<double> Gradient(Function * func, vector<double> x);
 class StopCriterion {
 public:
 	virtual ~StopCriterion() {}
+	double eps;
+	double step;
+	int N;
 	/**
 	 * The function Stop responsible for stopping optimization.
 	 *
@@ -38,6 +39,9 @@ public:
 	 * @param func is function pointer
 	 * @returns bool value: true --- stop of the optimization, false --- continue the optimization
 	 */
+	void SetEps(double x) { eps = x; }
+	void SetN (int x) { N = x; }
+
 	virtual bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) = 0;
 };
 

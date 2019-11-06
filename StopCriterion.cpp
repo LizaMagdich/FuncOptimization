@@ -9,9 +9,9 @@ vector<double> Gradient(Function * func, vector<double> x) {
 		vector<double> temp1(dim);
 		vector<double> temp2(dim);
 		temp1 = temp2 = x;
-		temp1[i] += step;
-		temp2[i] -= step;
-		grad.push_back((func->eval(temp1) - func->eval(temp2)) / (2 * step));
+		temp1[i] += step_1;
+		temp2[i] -= step_1;
+		grad.push_back((func->eval(temp1) - func->eval(temp2)) / (2 * step_1));
 		temp1[i] = x[i];
 		temp2[i] = x[i];
 	}

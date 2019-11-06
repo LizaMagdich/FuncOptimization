@@ -25,6 +25,8 @@ public:
 	virtual  bool isIn(vector<double> x) { return true; }
 	virtual ~Area() {};
 	vector<double> borders;
+	double eps;
+	void SetEps(double x) { eps = x; }
 };
 
 class RectArea_F_1 : public Area {

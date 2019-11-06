@@ -40,16 +40,19 @@ public:
 	void SetStartPoint(vector<double> x) { StartPoint = x; }
 	vector<double> GetFinalPoint() { return xFin; }
 	virtual ~OptMethod() {}
+	void SetStep(double x) { step = x; }
 
 protected:
 	// x0 is the optimization start point
 	vector<double>  StartPoint;
 	// xFin is the optimization end point
 	vector<double> xFin;
+	double step;
 };
 
 class CoordinateDescent : public OptMethod {
 public:
+	
 	double Optimize(Area * area, Function * func, StopCriterion * stopCrit, int * iter) override;
 	~CoordinateDescent() {}
 };

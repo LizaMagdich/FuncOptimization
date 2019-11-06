@@ -17,6 +17,8 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 	if (stopCritForFist->Stop(0, StartPoint, StartPoint, currentValueInPoint, currentValueInPoint, func)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return currentValueInPoint; }
 	delete stopCritForFist;
 
+	double eps = stopCrit->eps;
+	int N = stopCrit->N;
 	for (int i = 1; ; ++i) {
 		vector<double> newPoint;
 		for (int i = 0; i < dim * 2; i = i + 2) {
@@ -41,6 +43,9 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 	StopCriterion * stopCritForFist = new NormGrad;
 	if (stopCritForFist->Stop(0, StartPoint, StartPoint, minFuncValue, minFuncValue, func)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return minFuncValue; }
 	delete stopCritForFist;
+
+	double eps = stopCrit->eps;
+	int N = stopCrit->N;
 
 	vector<double> currentPoint(dim);
 	vector<double>  previousePoint(dim);
