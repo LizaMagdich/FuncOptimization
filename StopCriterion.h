@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <vector>
 
+using namespace std;
+
 const double eps = 10e-5;
-const double step = 10e-4;
+const double step = 10e-3;
 const int N = 1000;
 
 double Norm(vector<double> x);

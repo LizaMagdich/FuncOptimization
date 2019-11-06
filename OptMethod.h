@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <vector>
 
-using namespace std;
+
 
 /**
  * The OptMethod class represents the parent class for possible optimization methods.
@@ -25,7 +25,6 @@ using namespace std;
  */
 
 class OptMethod {
-
 public:
 	/**
 	 * The function Optimize responsible for stopping optimization.
@@ -38,12 +37,15 @@ public:
 	 */
 
 	virtual double Optimize(Area * area, Function * func, StopCriterion * stopCrit, int * iter) = 0;
+	void SetStartPoint(vector<double> x) { StartPoint = x; }
+	vector<double> GetFinalPoint() { return xFin; }
+	virtual ~OptMethod() {}
+
+protected:
 	// x0 is the optimization start point
-	vector<double>  x0;
+	vector<double>  StartPoint;
 	// xFin is the optimization end point
 	vector<double> xFin;
-
-	virtual ~OptMethod() {}
 };
 
 class CoordinateDescent : public OptMethod {
