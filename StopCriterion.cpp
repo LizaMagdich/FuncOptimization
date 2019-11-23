@@ -1,19 +1,16 @@
 #include "pch.h"
 #include "StopCriterion.h"
-#include "Function.h"
 
 vector<double> Gradient(Function * func, vector<double> x) {
 	int dim = x.size();
 	vector<double> grad;
 	for (int i = 0; i < dim; ++i) {
-		vector<double> temp1(dim);
-		vector<double> temp2(dim);
+		vector<double> temp1;
+		vector<double> temp2;
 		temp1 = temp2 = x;
 		temp1[i] += step_1;
 		temp2[i] -= step_1;
 		grad.push_back((func->eval(temp1) - func->eval(temp2)) / (2 * step_1));
-		temp1[i] = x[i];
-		temp2[i] = x[i];
 	}
 
 	return grad;
@@ -29,7 +26,7 @@ double Norm(vector<double> x) {
 }
 
 bool NormDifOfNodes::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) {
-	if (iter == N) { return true; }
+	if (iter == numberMaxIter) { return true; }
 
 	int dim = x1.size();
 	vector<double>  dif(dim);
@@ -42,15 +39,15 @@ bool NormDifOfNodes::Stop(int iter, vector<double> x1, vector<double> x2, double
 }
 
 bool NormDifOfValFunc::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) {
-	if (iter == N) { return true; }
+	if (iter == numberMaxIter) { return true; }
 
 	vector<double>  dif;
 	if (f1 != 0) {
-		dif.push_back((f2 - f1) / f1);
+		dif.push_back((f1 - f2) / f1);
 	}
 	else
 	{
-		dif.push_back((f2 - f1) / step);
+		dif.push_back((f1 - f2) / step_1);
 	}
 
 	if (Norm(dif) < eps) { return true; }
@@ -58,7 +55,7 @@ bool NormDifOfValFunc::Stop(int iter, vector<double> x1, vector<double> x2, doub
 }
 
 bool  NormGrad::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) {
-	if (iter == N) { return true; }
+	if (iter == numberMaxIter) { return true; }
 	vector<double>  grad;
 	grad = Gradient(func, x1);
 

@@ -14,6 +14,8 @@ using namespace std;
 
 class Area {
 public:
+	double eps;
+	void SetEps(double x) {eps = x;}
 	virtual const char * Name() { return "\0"; }
 	void PrintName();
 	/**
@@ -25,8 +27,7 @@ public:
 	virtual  bool isIn(vector<double> x) { return true; }
 	virtual ~Area() {};
 	vector<double> borders;
-	double eps;
-	void SetEps(double x) { eps = x; }
+	double GetBorderI(int i) { return borders[i]; }
 };
 
 class RectArea_F_1 : public Area {

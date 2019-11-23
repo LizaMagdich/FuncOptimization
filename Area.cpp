@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Area.h"
-#include "StopCriterion.h"
+
 
 void Area::PrintName() { cout << "Area is " << Name(); cout << endl; }
 

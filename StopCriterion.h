@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-const double step_1 = 10e-3;
+const double step_1 = 10e-5;
 
 
 double Norm(vector<double> x);
@@ -26,8 +26,7 @@ class StopCriterion {
 public:
 	virtual ~StopCriterion() {}
 	double eps;
-	double step;
-	int N;
+	int numberMaxIter;
 	/**
 	 * The function Stop responsible for stopping optimization.
 	 *
@@ -40,7 +39,8 @@ public:
 	 * @returns bool value: true --- stop of the optimization, false --- continue the optimization
 	 */
 	void SetEps(double x) { eps = x; }
-	void SetN (int x) { N = x; }
+	double GetEps() { return eps; }
+	void SetNumberMaxIter(int x) { numberMaxIter = x; }
 
 	virtual bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) = 0;
 };

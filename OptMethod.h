@@ -14,8 +14,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <vector>
+#include <algorithm>
 
-
+const double goldenRatio = (1 + sqrt(5)) / 2;
 
 /**
  * The OptMethod class represents the parent class for possible optimization methods.
@@ -40,14 +41,13 @@ public:
 	void SetStartPoint(vector<double> x) { StartPoint = x; }
 	vector<double> GetFinalPoint() { return xFin; }
 	virtual ~OptMethod() {}
-	void SetStep(double x) { step = x; }
+
 
 protected:
 	// x0 is the optimization start point
 	vector<double>  StartPoint;
 	// xFin is the optimization end point
 	vector<double> xFin;
-	double step;
 };
 
 class CoordinateDescent : public OptMethod {
@@ -61,6 +61,8 @@ class StohasticSearch : public OptMethod {
 public:
 	double Optimize(Area * area, Function * func, StopCriterion * stopCrit, int * iter) override;
 	~StohasticSearch() {}
+	double prob;
+	void SetP(double x) { prob = x; }
 };
 
 
