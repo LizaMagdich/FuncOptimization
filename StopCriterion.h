@@ -27,6 +27,7 @@ public:
 	virtual ~StopCriterion() {}
 	double eps;
 	int numberMaxIter;
+	int numbMaxIterAfterLastImp;
 	/**
 	 * The function Stop responsible for stopping optimization.
 	 *
@@ -41,22 +42,33 @@ public:
 	void SetEps(double x) { eps = x; }
 	double GetEps() { return eps; }
 	void SetNumberMaxIter(int x) { numberMaxIter = x; }
+	void SetNumbMaxIterAfterLastImp(int x) { numbMaxIterAfterLastImp = x; }
 
-	virtual bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) = 0;
+	virtual bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) = 0;
 };
 
 
 class NormDifOfNodes : public StopCriterion {
 public:
-	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) override;
+	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) override;
 };
 
 class NormDifOfValFunc : public StopCriterion {
 public:
-	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) override;
+	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) override;
 };
 
 class NormGrad : public StopCriterion {
 public:
-	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) override;
+	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) override;
+};
+
+class ModDifOfNodes : public StopCriterion {
+public:
+	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) override;
+};
+
+class LatestImprov: public StopCriterion {
+public:
+	bool Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) override;
 };

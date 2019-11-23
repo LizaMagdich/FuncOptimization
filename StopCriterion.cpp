@@ -25,7 +25,7 @@ double Norm(vector<double> x) {
 	return sqrt(temp);
 }
 
-bool NormDifOfNodes::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) {
+bool NormDifOfNodes::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) {
 	if (iter == numberMaxIter) { return true; }
 
 	int dim = x1.size();
@@ -38,7 +38,7 @@ bool NormDifOfNodes::Stop(int iter, vector<double> x1, vector<double> x2, double
 	return false;
 }
 
-bool NormDifOfValFunc::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) {
+bool NormDifOfValFunc::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) {
 	if (iter == numberMaxIter) { return true; }
 
 	vector<double>  dif;
@@ -54,11 +54,24 @@ bool NormDifOfValFunc::Stop(int iter, vector<double> x1, vector<double> x2, doub
 	return false;
 }
 
-bool  NormGrad::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func) {
+bool  NormGrad::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) {
 	if (iter == numberMaxIter) { return true; }
 	vector<double>  grad;
 	grad = Gradient(func, x1);
 
 	if (Norm(grad) < eps) { return true; }
+	return false;
+}
+
+
+bool ModDifOfNodes::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov){
+	if (iter == numberMaxIter) { return true; }
+	if (abs(f1 - f2) < eps) { return true; }
+	return false;
+}
+
+bool LatestImprov::Stop(int iter, vector<double> x1, vector<double> x2, double  f1, double  f2, Function * func, int iterLatestImprov) {
+	if (iter == numberMaxIter) { return true; }                                                       
+	if (iterLatestImprov > numbMaxIterAfterLastImp) { return true; }
 	return false;
 }

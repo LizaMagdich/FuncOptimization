@@ -19,12 +19,14 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 
 	StopCriterion * stopCritForFist = new NormGrad;
 	stopCritForFist->SetEps(stopCrit->GetEps());
-	if (stopCritForFist->Stop(0, StartPoint, StartPoint, currentValueInPoint, currentValueInPoint, func)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return currentValueInPoint; }
+	if (stopCritForFist->Stop(0, StartPoint, StartPoint, currentValueInPoint, currentValueInPoint, func, 0)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return currentValueInPoint; }
 	delete stopCritForFist;
 
 	double eps = stopCrit->eps;
 	int N = stopCrit->numberMaxIter;
-	for (int i = 1; ; ++i) {
+	int index = 0;
+	double lastF = 0;
+	for (int i = 1; ; ++i, ++index) {
 		vector<double> newPoint;
 		std::uniform_real_distribution<> dist(0, 1);
 		double alpha = dist(gen);
@@ -55,11 +57,13 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 		if (currentValueInPoint - temp > eps) {
 			previousePoint = currentPoint;
 			currentPoint = newPoint;
+			lastF = currentValueInPoint;
 			currentValueInPoint = temp;
-			if (stopCrit->Stop(i, currentPoint, previousePoint, currentValueInPoint, func->eval(previousePoint), func)) { *iter = i; xFin = currentPoint;  return  currentValueInPoint; }
+			if (stopCrit->Stop(i, currentPoint, previousePoint, currentValueInPoint, lastF, func, index)) { *iter = i; xFin = currentPoint;  return  currentValueInPoint; }
 			if (flagSmallVicinity) {
 				delta /= 2;
 			}
+			index = 0;
 		}
 		if (i == N) { *iter = i; xFin = currentPoint;  return  currentValueInPoint; }
 	}
@@ -70,7 +74,7 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 	double  minFuncValue = func->eval(StartPoint);
 	StopCriterion * stopCritForFist = new NormGrad;
 	stopCritForFist->SetEps(stopCrit->GetEps());
-	if (stopCritForFist->Stop(0, StartPoint, StartPoint, minFuncValue, minFuncValue, func)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return minFuncValue; }
+	if (stopCritForFist->Stop(0, StartPoint, StartPoint, minFuncValue, minFuncValue, func, 0)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return minFuncValue; }
 	delete stopCritForFist;
 
 	double eps = stopCrit->eps;
@@ -184,7 +188,7 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 		previousePoint = currentPoint;
 		currentPoint = tempCurrentPoint;
 		
-		if (stopCrit->Stop(j, currentPoint, previousePoint, minFuncValue, func->eval(previousePoint), func)) { *iter = j; xFin = currentPoint;  return  minFuncValue; }
+		if (stopCrit->Stop(j, currentPoint, previousePoint, minFuncValue, func->eval(previousePoint), func, 0)) { *iter = j; xFin = currentPoint;  return  minFuncValue; }
 	}
 
 }
