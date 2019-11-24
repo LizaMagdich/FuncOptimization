@@ -3,7 +3,12 @@
 #include <random>
 
 std::random_device rd;
+std::random_device rd1;
+std::random_device rd2;
 std::mt19937 gen(rd());
+std::mt19937 gen1(rd1());
+std::mt19937 gen2(rd2());
+std::uniform_real_distribution<> dist(0, 1);
 
 const double deltaStart = 10e-2;
 
@@ -28,7 +33,6 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 	double lastF = 0;
 	for (int i = 1; ; ++i, ++index) {
 		vector<double> newPoint;
-		std::uniform_real_distribution<> dist(0, 1);
 		double alpha = dist(gen);
 		bool flagSmallVicinity = 0;
 		if (p - alpha > eps) {
@@ -42,13 +46,13 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 				(currentPoint[i] - delta) - borders[0] > eps ? a = currentPoint[i] - delta : a = borders[0];
 				borders[1] - (currentPoint[i] + delta) > eps ? b = currentPoint[i] + delta : b = borders[1];
 				std::uniform_real_distribution<> dis(a, b);
-				newPoint.push_back(dis(gen));
+				newPoint.push_back(dis(gen1));
 			}
 		}
 		else {
 			for (int i = 0; i < dim * 2; i = i + 2) {
 				std::uniform_real_distribution<> dis(area->borders[i], area->borders[i + 1]);
-				newPoint.push_back(dis(gen));
+				newPoint.push_back(dis(gen2));
 			}
 		}
 		
