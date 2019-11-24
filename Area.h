@@ -15,7 +15,9 @@ using namespace std;
 class Area {
 public:
 	double eps;
+	int dim;
 	void SetEps(double x) {eps = x;}
+	void SetDim(int x) {dim = x;}
 	virtual const char * Name() { return "\0"; }
 	void PrintName();
 	/**
@@ -24,7 +26,7 @@ public:
 	 * @param x is a point
 	 * @returns bool value: true --- is inside, false --- isn't inside.
 	 */
-	virtual  bool isIn(vector<double> x) { return true; }
+	bool isIn(vector<double> x);
 	virtual ~Area() {};
 	vector<double> borders;
 	double GetBorderI(int i) { return borders[i]; }
@@ -32,17 +34,14 @@ public:
 
 class RectArea_F_1 : public Area {
 public:
-	bool isIn(vector<double> x) override;
 };
 
 class RectArea_F_2 : public Area {
 public:
-	bool isIn(vector<double> x) override;
 };
 
 class RectArea_F_3 : public Area {
 public:
-	bool isIn(vector<double> x) override;
 };
 
 

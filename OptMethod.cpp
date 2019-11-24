@@ -24,7 +24,13 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 
 	StopCriterion * stopCritForFist = new NormGrad;
 	stopCritForFist->SetEps(stopCrit->GetEps());
-	if (stopCritForFist->Stop(0, StartPoint, StartPoint, currentValueInPoint, currentValueInPoint, func, 0)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return currentValueInPoint; }
+	if (stopCritForFist->Stop(0, StartPoint, StartPoint, currentValueInPoint, currentValueInPoint, func, 0)) 
+	{ 
+	*iter = 0; 
+	xFin = StartPoint; 
+	delete stopCritForFist;  
+	return currentValueInPoint; 
+	}
 	delete stopCritForFist;
 
 	double eps = stopCrit->eps;
@@ -63,7 +69,12 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 			currentPoint = newPoint;
 			lastF = currentValueInPoint;
 			currentValueInPoint = temp;
-			if (stopCrit->Stop(i, currentPoint, previousePoint, currentValueInPoint, lastF, func, index)) { *iter = i; xFin = currentPoint;  return  currentValueInPoint; }
+			if (stopCrit->Stop(i, currentPoint, previousePoint, currentValueInPoint, lastF, func, index)) 
+			{ 
+				*iter = i;
+				xFin = currentPoint; 
+				return  currentValueInPoint;
+			}
 			if (flagSmallVicinity) {
 				delta /= 2;
 			}
@@ -78,7 +89,12 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 	double  minFuncValue = func->eval(StartPoint);
 	StopCriterion * stopCritForFist = new NormGrad;
 	stopCritForFist->SetEps(stopCrit->GetEps());
-	if (stopCritForFist->Stop(0, StartPoint, StartPoint, minFuncValue, minFuncValue, func, 0)) { *iter = 0; xFin = StartPoint; delete stopCritForFist;  return minFuncValue; }
+	if (stopCritForFist->Stop(0, StartPoint, StartPoint, minFuncValue, minFuncValue, func, 0)) { 
+		*iter = 0;
+		xFin = StartPoint;
+		delete stopCritForFist;
+		return minFuncValue;
+	}
 	delete stopCritForFist;
 
 	double eps = stopCrit->eps;
@@ -192,7 +208,11 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 		previousePoint = currentPoint;
 		currentPoint = tempCurrentPoint;
 		
-		if (stopCrit->Stop(j, currentPoint, previousePoint, minFuncValue, func->eval(previousePoint), func, 0)) { *iter = j; xFin = currentPoint;  return  minFuncValue; }
+		if (stopCrit->Stop(j, currentPoint, previousePoint, minFuncValue, func->eval(previousePoint), func, 0)) { 
+			*iter = j;
+			xFin = currentPoint;  
+			return  minFuncValue;
+		}
 	}
 
 }

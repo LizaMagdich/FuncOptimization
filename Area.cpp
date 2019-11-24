@@ -4,20 +4,13 @@
 
 void Area::PrintName() { cout << "Area is " << Name(); cout << endl; }
 
-bool  RectArea_F_1::isIn(vector<double> x) {
-	if (borders[0] - eps < x[0] && x[0] < borders[1] + eps && borders[2] - eps < x[1] && x[1] < borders[3] + eps) return true;
-	else return false;
+bool  Area::isIn(vector<double> x) {
+	for (int i = 0; i < dim; i += 2) {
+		if (borders[i] - eps > x[0] || x[0] > borders[i + 1] + eps) return false;
+	}
+	return true;
 }
 
-bool  RectArea_F_2::isIn(vector<double> x) {
-	if (borders[0] - eps < x[0] && x[0] < borders[1] + eps && borders[2] - eps < x[1] && x[1] < borders[3] + eps && borders[4] - eps < x[2] && x[2] < borders[5] + eps) return true;
-	else return false;
-}
-
-bool  RectArea_F_3::isIn(vector<double> x) {
-	if (borders[0] - eps < x[0] && x[0] < borders[1] + eps && borders[2] - eps < x[1] && x[1] < borders[3] + eps && borders[4] - eps < x[2] && x[2] < borders[5] + eps && borders[6] - eps < x[3] && x[3] < borders[7] + eps) return true;
-	else return false;
-}
 
 const char * Area_1_F_1::Name() { return "[0 ; 3]^2\0"; }
 

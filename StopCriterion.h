@@ -6,8 +6,6 @@
 #include <vector>
 
 using namespace std;
-const double step_1 = 10e-5;
-
 
 double Norm(vector<double> x);
 vector<double> Gradient(Function * func, vector<double> x);

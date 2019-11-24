@@ -4,13 +4,12 @@
 vector<double> Gradient(Function * func, vector<double> x) {
 	int dim = x.size();
 	vector<double> grad;
+	double eps = func->GetEps();
 	for (int i = 0; i < dim; ++i) {
 		vector<double> temp1;
-		vector<double> temp2;
-		temp1 = temp2 = x;
-		temp1[i] += step_1;
-		temp2[i] -= step_1;
-		grad.push_back((func->eval(temp1) - func->eval(temp2)) / (2 * step_1));
+		temp1 = x;
+		temp1[i] += eps;
+		grad.push_back((func->eval(temp1) - func->eval(x)) /  eps);
 	}
 
 	return grad;
@@ -47,7 +46,7 @@ bool NormDifOfValFunc::Stop(int iter, vector<double> x1, vector<double> x2, doub
 	}
 	else
 	{
-		dif.push_back((f1 - f2) / step_1);
+		dif.push_back((f1 - f2) / eps);
 	}
 
 	if (Norm(dif) < eps) { return true; }
