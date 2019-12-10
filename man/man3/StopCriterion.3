@@ -1,0 +1,80 @@
+.TH "StopCriterion" 3 "11 Dec 2019" "Version 1" "FuncOptimization" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+StopCriterion \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <StopCriterion.h>\fP
+.PP
+Inherited by LatestImprov, ModDifOfNodes, NormDifOfNodes, NormDifOfValFunc, and NormGrad.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBSetEps\fP (double x)"
+.br
+.ti -1c
+.RI "double \fBGetEps\fP ()"
+.br
+.ti -1c
+.RI "void \fBSetNumberMaxIter\fP (int x)"
+.br
+.ti -1c
+.RI "void \fBSetNumbMaxIterAfterLastImp\fP (int x)"
+.br
+.ti -1c
+.RI "virtual bool \fBStop\fP (int iter, vector< double > x1, vector< double > x2, double f1, double f2, \fBFunction\fP *func, int iterLatestImprov)=0"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "double \fBeps\fP"
+.br
+.ti -1c
+.RI "int \fBnumberMaxIter\fP"
+.br
+.ti -1c
+.RI "int \fBnumbMaxIterAfterLastImp\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The \fBStopCriterion\fP class represents the parent class for possible stopping criteria. It has 2 successors: <1> NormDifOfNodes --- stop criterion according to the norm of the difference between last two points <2> NormDifOfValFunc --- stop criterion according to the norm of the difference between values at last two points <3> NormGrad --- stop criterion according to the norm of the gradient value at last point
+.PP
+All criteria contain a stop criterion by the number of iterations 
+.SH "Member Function Documentation"
+.PP 
+.SS "void StopCriterion::SetEps (double x)\fC [inline]\fP"
+.PP
+The function Stop responsible for stopping optimization.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIiter\fP is a number of iterations 
+.br
+\fIx1\fP is a current point 
+.br
+\fIx2\fP is a previous point 
+.br
+\fIf1\fP is a value of the function at current point 
+.br
+\fIf2\fP is a value of the function at previous point 
+.br
+\fIfunc\fP is function pointer 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool value: true --- stop of the optimization, false --- continue the optimization 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for FuncOptimization from the source code.

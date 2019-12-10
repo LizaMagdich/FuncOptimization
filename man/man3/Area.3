@@ -1,0 +1,65 @@
+.TH "Area" 3 "11 Dec 2019" "Version 1" "FuncOptimization" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Area \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <Area.h>\fP
+.PP
+Inherited by RectArea_F_1, RectArea_F_2, and RectArea_F_3.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBSetDim\fP (int x)"
+.br
+.ti -1c
+.RI "virtual const char * \fBName\fP ()"
+.br
+.ti -1c
+.RI "void \fBPrintName\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisIn\fP (vector< double > x)"
+.br
+.ti -1c
+.RI "double \fBGetBorderI\fP (int i)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBdim\fP"
+.br
+.ti -1c
+.RI "vector< double > \fBborders\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The \fBArea\fP class represents parent class for all possible definition areas for the presented functions. Each of the 3 functions has their 3 definition areas. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool Area::isIn (vector< double > x)"
+.PP
+The function isIn checks if a point is in the definition area.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP is a point 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+bool value: true --- is inside, false --- isn't inside. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for FuncOptimization from the source code.

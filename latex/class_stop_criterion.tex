@@ -1,0 +1,80 @@
+\hypertarget{class_stop_criterion}{
+\section{StopCriterion Class Reference}
+\label{class_stop_criterion}\index{StopCriterion@{StopCriterion}}
+}
+{\tt \#include $<$StopCriterion.h$>$}
+
+Inherited by LatestImprov, ModDifOfNodes, NormDifOfNodes, NormDifOfValFunc, and NormGrad.
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+void \hyperlink{class_stop_criterion_4d4190f91f16897f4dba141f62f421ac}{SetEps} (double x)
+\item 
+\hypertarget{class_stop_criterion_7b2c88d84e4a1bf2e04b923414cfa084}{
+double \textbf{GetEps} ()}
+\label{class_stop_criterion_7b2c88d84e4a1bf2e04b923414cfa084}
+
+\item 
+\hypertarget{class_stop_criterion_415f032d0b6e7fd9d224e5aace00ddf6}{
+void \textbf{SetNumberMaxIter} (int x)}
+\label{class_stop_criterion_415f032d0b6e7fd9d224e5aace00ddf6}
+
+\item 
+\hypertarget{class_stop_criterion_b4ecd6469a833389909b83a2e90b6371}{
+void \textbf{SetNumbMaxIterAfterLastImp} (int x)}
+\label{class_stop_criterion_b4ecd6469a833389909b83a2e90b6371}
+
+\item 
+\hypertarget{class_stop_criterion_f268e929304b7e9cc78d89821088dc84}{
+virtual bool \textbf{Stop} (int iter, vector$<$ double $>$ x1, vector$<$ double $>$ x2, double f1, double f2, \hyperlink{class_function}{Function} $\ast$func, int iterLatestImprov)=0}
+\label{class_stop_criterion_f268e929304b7e9cc78d89821088dc84}
+
+\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_stop_criterion_a848cdc8c317a0788f3bc2daa9444b18}{
+double \textbf{eps}}
+\label{class_stop_criterion_a848cdc8c317a0788f3bc2daa9444b18}
+
+\item 
+\hypertarget{class_stop_criterion_116d585b05dfa557102d6fc3d2e1a445}{
+int \textbf{numberMaxIter}}
+\label{class_stop_criterion_116d585b05dfa557102d6fc3d2e1a445}
+
+\item 
+\hypertarget{class_stop_criterion_8b53203beb78987376847691df4bad34}{
+int \textbf{numbMaxIterAfterLastImp}}
+\label{class_stop_criterion_8b53203beb78987376847691df4bad34}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_stop_criterion}{StopCriterion} class represents the parent class for possible stopping criteria. It has 2 successors: $<$1$>$ NormDifOfNodes --- stop criterion according to the norm of the difference between last two points $<$2$>$ NormDifOfValFunc --- stop criterion according to the norm of the difference between values at last two points $<$3$>$ NormGrad --- stop criterion according to the norm of the gradient value at last point
+
+All criteria contain a stop criterion by the number of iterations 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_stop_criterion_4d4190f91f16897f4dba141f62f421ac}{
+\index{StopCriterion@{StopCriterion}!SetEps@{SetEps}}
+\index{SetEps@{SetEps}!StopCriterion@{StopCriterion}}
+\subsubsection[{SetEps}]{\setlength{\rightskip}{0pt plus 5cm}void StopCriterion::SetEps (double {\em x})\hspace{0.3cm}{\tt  \mbox{[}inline\mbox{]}}}}
+\label{class_stop_criterion_4d4190f91f16897f4dba141f62f421ac}
+
+
+The function Stop responsible for stopping optimization.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em iter}]is a number of iterations \item[{\em x1}]is a current point \item[{\em x2}]is a previous point \item[{\em f1}]is a value of the function at current point \item[{\em f2}]is a value of the function at previous point \item[{\em func}]is function pointer \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]bool value: true --- stop of the optimization, false --- continue the optimization \end{Desc}
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+D:/4\_\-course/C++/FuncOptimization/StopCriterion.h\end{CompactItemize}

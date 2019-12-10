@@ -1,0 +1,63 @@
+.TH "Function" 3 "11 Dec 2019" "Version 1" "FuncOptimization" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Function \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <Function.h>\fP
+.PP
+Inherited by F_1, F_2, and F_3.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBGetDimension\fP ()"
+.br
+.ti -1c
+.RI "virtual double \fBeval\fP (vector< double > x)"
+.br
+.ti -1c
+.RI "void \fBPrintName\fP ()"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual const char * \fBName\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBdimension\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The \fBFunction\fP class represents the parent class for all possible functions. It has 3 successors --- 3 functions 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual double Function::eval (vector< double > x)\fC [inline, virtual]\fP"
+.PP
+The function eval returns the value of the function at a given point.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIx\fP is a point 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+value of the function at a given point 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for FuncOptimization from the source code.

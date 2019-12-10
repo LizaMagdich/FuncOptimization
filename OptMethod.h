@@ -17,6 +17,7 @@
 #include <algorithm>
 
 const double goldenRatio = (1 + sqrt(5)) / 2;
+const int maxIter = 30;
 
 /**
  * The OptMethod class represents the parent class for possible optimization methods.
@@ -44,7 +45,7 @@ public:
 
 
 protected:
-	// x0 is the optimization start point
+	// StartPoint is the optimization start point
 	vector<double>  StartPoint;
 	// xFin is the optimization end point
 	vector<double> xFin;

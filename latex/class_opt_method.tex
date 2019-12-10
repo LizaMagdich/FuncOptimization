@@ -1,0 +1,63 @@
+\hypertarget{class_opt_method}{
+\section{OptMethod Class Reference}
+\label{class_opt_method}\index{OptMethod@{OptMethod}}
+}
+{\tt \#include $<$OptMethod.h$>$}
+
+Inherited by CoordinateDescent, and StohasticSearch.
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+virtual double \hyperlink{class_opt_method_870f036f617f136871f438570f67140b}{Optimize} (\hyperlink{class_area}{Area} $\ast$area, \hyperlink{class_function}{Function} $\ast$func, \hyperlink{class_stop_criterion}{StopCriterion} $\ast$stopCrit, int $\ast$iter)=0
+\item 
+\hypertarget{class_opt_method_0288e3b664e3397c0160e2282db20371}{
+void \textbf{SetStartPoint} (vector$<$ double $>$ x)}
+\label{class_opt_method_0288e3b664e3397c0160e2282db20371}
+
+\item 
+\hypertarget{class_opt_method_84be194e61a1c52956931eaca4cfcf9b}{
+vector$<$ double $>$ \textbf{GetFinalPoint} ()}
+\label{class_opt_method_84be194e61a1c52956931eaca4cfcf9b}
+
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+\hypertarget{class_opt_method_3bc2aacdfea87cf04ab42d1b9ec6c37e}{
+vector$<$ double $>$ \textbf{StartPoint}}
+\label{class_opt_method_3bc2aacdfea87cf04ab42d1b9ec6c37e}
+
+\item 
+\hypertarget{class_opt_method_10c828ff52fd5eabb5f65fc903dd1cda}{
+vector$<$ double $>$ \textbf{xFin}}
+\label{class_opt_method_10c828ff52fd5eabb5f65fc903dd1cda}
+
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_opt_method}{OptMethod} class represents the parent class for possible optimization methods. It has 2 successors: $<$1$>$ Coordinate descent --- CoordinateDescent $<$2$>$ Stohastic search --- StohasticSearch 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_opt_method_870f036f617f136871f438570f67140b}{
+\index{OptMethod@{OptMethod}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!OptMethod@{OptMethod}}
+\subsubsection[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual double OptMethod::Optimize ({\bf Area} $\ast$ {\em area}, \/  {\bf Function} $\ast$ {\em func}, \/  {\bf StopCriterion} $\ast$ {\em stopCrit}, \/  int $\ast$ {\em iter})\hspace{0.3cm}{\tt  \mbox{[}pure virtual\mbox{]}}}}
+\label{class_opt_method_870f036f617f136871f438570f67140b}
+
+
+The function Optimize responsible for stopping optimization.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em area}]is the pointer to the function definition area \item[{\em func}]is the pointer to the function \item[{\em stopCrit}]is the pointer to the stop criterion \item[{\em iter}]is the number of iterations \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]minimum function value in this area \end{Desc}
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+D:/4\_\-course/C++/FuncOptimization/OptMethod.h\end{CompactItemize}

@@ -1,0 +1,65 @@
+.TH "OptMethod" 3 "11 Dec 2019" "Version 1" "FuncOptimization" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OptMethod \- 
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <OptMethod.h>\fP
+.PP
+Inherited by CoordinateDescent, and StohasticSearch.
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual double \fBOptimize\fP (\fBArea\fP *area, \fBFunction\fP *func, \fBStopCriterion\fP *stopCrit, int *iter)=0"
+.br
+.ti -1c
+.RI "void \fBSetStartPoint\fP (vector< double > x)"
+.br
+.ti -1c
+.RI "vector< double > \fBGetFinalPoint\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "vector< double > \fBStartPoint\fP"
+.br
+.ti -1c
+.RI "vector< double > \fBxFin\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The \fBOptMethod\fP class represents the parent class for possible optimization methods. It has 2 successors: <1> Coordinate descent --- CoordinateDescent <2> Stohastic search --- StohasticSearch 
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual double OptMethod::Optimize (\fBArea\fP * area, \fBFunction\fP * func, \fBStopCriterion\fP * stopCrit, int * iter)\fC [pure virtual]\fP"
+.PP
+The function Optimize responsible for stopping optimization.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarea\fP is the pointer to the function definition area 
+.br
+\fIfunc\fP is the pointer to the function 
+.br
+\fIstopCrit\fP is the pointer to the stop criterion 
+.br
+\fIiter\fP is the number of iterations 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+minimum function value in this area 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for FuncOptimization from the source code.

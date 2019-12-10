@@ -6,6 +6,7 @@
 #include <vector>
 
 using namespace std;
+const double eps = 1e-8;
 
 /**
  * The Area class represents parent class for all possible definition areas for the presented functions.
@@ -14,9 +15,7 @@ using namespace std;
 
 class Area {
 public:
-	double eps;
 	int dim;
-	void SetEps(double x) {eps = x;}
 	void SetDim(int x) {dim = x;}
 	virtual const char * Name() { return "\0"; }
 	void PrintName();

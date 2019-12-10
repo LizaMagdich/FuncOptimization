@@ -10,7 +10,8 @@ std::mt19937 gen1(rd1());
 std::mt19937 gen2(rd2());
 std::uniform_real_distribution<> dist(0, 1);
 
-const double deltaStart = 10e-2;
+const double deltaStart = 0.5;
+const double eps_1 = 1e-10;
 
 
 double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * stopCrit, int * iter) {
@@ -22,6 +23,7 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 	previousePoint = currentPoint = StartPoint;
 	double currentValueInPoint = func->eval(currentPoint);
 
+	double eps = stopCrit->GetEps();
 	StopCriterion * stopCritForFist = new NormGrad;
 	stopCritForFist->SetEps(stopCrit->GetEps());
 	if (stopCritForFist->Stop(0, StartPoint, StartPoint, currentValueInPoint, currentValueInPoint, func, 0)) 
@@ -33,7 +35,6 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 	}
 	delete stopCritForFist;
 
-	double eps = stopCrit->eps;
 	int N = stopCrit->numberMaxIter;
 	int index = 0;
 	double lastF = 0;
@@ -41,7 +42,7 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 		vector<double> newPoint;
 		double alpha = dist(gen);
 		bool flagSmallVicinity = 0;
-		if (p - alpha > eps) {
+		if (p - alpha > eps_1) {
 			int index = 0;
 			for (int i = 0; i < dim ; ++i, index+=2){
 				vector<double> borders;
@@ -49,8 +50,8 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 				borders.push_back(area->GetBorderI(index+1));
 				flagSmallVicinity = 1;
 				double a, b;
-				(currentPoint[i] - delta) - borders[0] > eps ? a = currentPoint[i] - delta : a = borders[0];
-				borders[1] - (currentPoint[i] + delta) > eps ? b = currentPoint[i] + delta : b = borders[1];
+				(currentPoint[i] - delta) - borders[0] > eps_1 ? a = currentPoint[i] - delta : a = borders[0];
+				borders[1] - (currentPoint[i] + delta) > eps_1 ? b = currentPoint[i] + delta : b = borders[1];
 				std::uniform_real_distribution<> dis(a, b);
 				newPoint.push_back(dis(gen1));
 			}
@@ -64,7 +65,7 @@ double StohasticSearch::Optimize(Area * area, Function * func, StopCriterion * s
 		
 
 		double temp = func->eval(newPoint);
-		if (currentValueInPoint - temp > eps) {
+		if (currentValueInPoint - temp > eps_1) {
 			previousePoint = currentPoint;
 			currentPoint = newPoint;
 			lastF = currentValueInPoint;
@@ -97,8 +98,6 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 	}
 	delete stopCritForFist;
 
-	double eps = stopCrit->eps;
-
 	vector<double> currentPoint(dim);
 	vector<double>  previousePoint(dim);
 	vector<double> tempCurrentPoint(dim);
@@ -123,9 +122,8 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 				double leftBorder = borders[ii], rightBorder = borders[ii + 1];
 				bool flagFirstIter = 1, flagRemRightBorder;
 				double f;
-				double tempLeftBorder, tempRightBorder;
-				while (rightBorder - leftBorder > eps)
-				{
+				double tempLeftBorder, tempRightBorder; 
+				for (int iter = 0; iter < maxIter; ++iter){
 					if (flagFirstIter) {
 						flagFirstIter = 0;
 						tempLeftBorder = rightBorder - (rightBorder - leftBorder) / goldenRatio;
@@ -207,6 +205,7 @@ double CoordinateDescent::Optimize(Area * area, Function * func, StopCriterion *
 
 		previousePoint = currentPoint;
 		currentPoint = tempCurrentPoint;
+
 		
 		if (stopCrit->Stop(j, currentPoint, previousePoint, minFuncValue, func->eval(previousePoint), func, 0)) { 
 			*iter = j;

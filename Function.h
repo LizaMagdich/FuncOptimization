@@ -16,7 +16,6 @@ class Function {
 protected:
 	virtual const char * Name() { return "\0"; }
 	int dimension;
-	double eps;
 public:
 	int GetDimension() { return dimension; }
 	/**
@@ -28,8 +27,6 @@ public:
 	virtual  double eval(vector<double> x) { return 0; };
 	void PrintName();
 	virtual ~Function() {}
-	void SetEps(double x) { eps = x; }
-	double GetEps() { return eps; }
 };
 
 

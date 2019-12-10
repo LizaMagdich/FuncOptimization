@@ -6,9 +6,11 @@
 #include <vector>
 
 using namespace std;
+const double step = 1e-9;
 
 double Norm(vector<double> x);
 vector<double> Gradient(Function * func, vector<double> x);
+
 
 /**
  * The StopCriterion class represents the parent class for possible stopping criteria.

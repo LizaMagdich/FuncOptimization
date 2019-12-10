@@ -5,8 +5,9 @@
 void Area::PrintName() { cout << "Area is " << Name(); cout << endl; }
 
 bool  Area::isIn(vector<double> x) {
-	for (int i = 0; i < dim; i += 2) {
-		if (borders[i] - eps > x[0] || x[0] > borders[i + 1] + eps) return false;
+	int index = 0;
+	for (int i = 0; i < dim; index += 2, ++i) {
+		if (borders[index] - eps > x[i] || x[i] > borders[index + 1] + eps) return false;
 	}
 	return true;
 }
